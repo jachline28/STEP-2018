@@ -29,12 +29,12 @@ class OrderedDict:
             tmpString = orderedInput
 
             # break the for-loop once there are no more characters in string to match
-            for each_alphabet in key:
-                if each_alphabet not in tmpString:
+            for eachAlphabet in key:
+                if eachAlphabet not in tmpString:
                     check= False
                     break
                 else:
-                    tmpString= tmpString.replace(each_alphabet, "", 1)  #Replace only one time
+                    tmpString= tmpString.replace(eachAlphabet, "", 1)  #Replace only one time
             if check == True:
                 candidates.append(value)
         return candidates

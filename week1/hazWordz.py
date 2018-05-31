@@ -16,17 +16,17 @@ def main(string, MyDict):
         candidates= MyDict.searchDict(string)
 
     highest= 0
-    highest_string= ""
+    highestString= ""
 
-    for each_candidates in candidates:
-        scores= scoring(each_candidates)
+    for eachCandidates in candidates:
+        scores= scoring(eachCandidates)
         if scores > highest:
             highest= scores
-            highest_string= each_candidates
+            highestString= eachCandidates
 
-    print("the best one is {} with score {} ".format(highest_string, highest))
+    print("the best one is {} with score {} ".format(highestString, highest))
 
-    return highest_string, highest
+    return highestString, highest
 
 
 def scoring(word):
@@ -35,10 +35,10 @@ def scoring(word):
     threePoints= "jkqxz"
     score= 0
 
-    for each_char in word[0]:
-        score+= onePoint.count(each_char)
-        score+= (twoPoints.count(each_char))*2
-        score+= (threePoints.count(each_char))*3
+    for eachChar in word[0]:
+        score+= onePoint.count(eachChar)
+        score+= (twoPoints.count(eachChar))*2
+        score+= (threePoints.count(eachChar))*3
     if score != 0:
         score+= 1
     return score**2
