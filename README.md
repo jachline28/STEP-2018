@@ -26,4 +26,4 @@ Some Points:
 
 ************************************
 #### Week 2: Matrix Multiplication
-1. Naive Solution: $O(n^3)$ 
+1. Naive Solution: \$O(n^3)\$    
