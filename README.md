@@ -2,9 +2,9 @@
 
 ### Summer Trainee Engineering Program Intern (STEP)
 There are eight classes per week (from 5/25 ~ 7/13) with different topics, including:  
-1. [Intro](#Week 1)  
-2. [Data Structures](#Week 2)  
-3. [Code Modulity](#Week 3)  
+1. [Intro](#week-1-i-can-haz-wordz)  
+2. [Data Structures](#week-2-matrix-multiplication)  
+3. [Code Modulity](#week-3-code-modulity)  
 4. More Data Structures and Algorithms  
 5. TSP Challenges  
 6. Distributed Computing and AppEngine  
