@@ -12,7 +12,7 @@ There are eight classes per week (from 5/25 ~ 7/13) with different topics, inclu
 8. Caching and Optimizing  
 
 ************************************
-<h4 id= "week1"> Week 1: [I Can Haz Wordz](https://icanhazwordz.appspot.com/") </h4>
+#### Week 1: [I Can Haz Wordz](https://icanhazwordz.appspot.com/") 
 The Goal is to get the highest score ([see help](https://icanhazwordz.appspot.com/help)) by creating long words, and the alphabets used are limited to the ones shown on the 4x4 grid.  
 
 Some Points:  
@@ -24,9 +24,9 @@ Some Points:
 > > driver.find\_element\_by\_id()  
 > > driver.get()   
 
-[sample code by teachers](https://github.com/step2018/idohazwordz)   
+[sample code by teachers](https://github.com/step2018/idohazwordz)
 ************************************
-<h4 id= "week2">Week 2: Matrix Multiplication</h4>
+#### Week 2: Matrix Multiplication
 Write code to calculate C = A * B, where A, B and C are matrices of size N * N. Measure the execution time of your code for various Ns, and plot the relationship between N and the execution time.
 
 
@@ -36,4 +36,4 @@ Write code to calculate C = A * B, where A, B and C are matrices of size N * N. 
 3. Encountered Problem (Python): The difference between normal list and numpy list, referencing [@aira002](https://qiita.com/aira002/items/50f0b58f57eba1ca2183) (有沒有逗點差別很大)  
 
 ************************************
-<h4 id= "week3"> Week 3: Code Modulity </h4>
+#### Week 3: Code Modulity 
