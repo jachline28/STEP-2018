@@ -26,4 +26,12 @@ Some Points:
 
 ************************************
 #### Week 2: Matrix Multiplication
-1. Naive Solution: \$O(n^3)\$    
+Write code to calculate C = A * B, where A, B and C are matrices of size N * N. Measure the execution time of your code for various Ns, and plot the relationship between N and the execution time.
+
+
+1. Naive Solution: `O(n^3)` 
+2. Strassen Algorithm: Using the concept of divide-and-conquer to fasten to `O(n^2.807)`. Efficient than Naive solution for large N.  
+	Referncing: [Strassen 演算法講解 by ccjou](https://ccjou.wordpress.com/2013/06/04/%E5%88%86%E6%B2%BB%E7%9F%A9%E9%99%A3%E4%B9%98%E6%B3%95%E2%94%80%E2%94%80strassen-%E6%BC%94%E7%AE%97%E6%B3%95/)   
+3. Encountered Problem (Python): The difference between normal list and numpy list, referencing [@aira002](https://qiita.com/aira002/items/50f0b58f57eba1ca2183) (有沒有逗點差別很大)  
+
+************************************
