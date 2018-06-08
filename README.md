@@ -24,4 +24,6 @@ Some Points:
 > > driver.find\_element\_by\_id()  
 > > driver.get()   
 
-
+************************************
+#### Week 2: Matrix Multiplication
+1. Naive Solution: $O(n^3)$ 
