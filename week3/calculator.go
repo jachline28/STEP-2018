@@ -66,18 +66,28 @@ func tokenize(line string) []token {
 			tok, index = readPlus(line, index)
 		case line[index] == '-':
 			tok, index = readMinus(line, index)
-		/////////////////////// newly added //////////////////////////////
-		case line[index] == '*':
+		case line[index] == '*' || line[index] == 'x' :
 			tok, index = readMul(line, index)
 		case line[index] == '/':
 			tok, index = readDiv(line, index)
-		/////////////////////////////////////////////////////////////////
 		default:
 			log.Panicf("invalid character: '%c' at index=%v in %v", line[index], index, line)
 		}
 		tokens = append(tokens, tok)
 	}
 	return tokens
+}
+// replace the mul/div with temp result value
+func removeIndex(tokens []token, index int, temp float64) []token{
+	newTokens := []token{}
+	for i, l:= 0, index-1 ; i<l; i++ {
+		newTokens= append(newTokens, tokens[i])
+	}
+	newTokens= append(newTokens, token{Number, temp})
+	for i, l:= index+2, len(tokens); i<l; i++ {
+		newTokens= append(newTokens, tokens[i])
+	}
+	return newTokens
 }
 
 // Evaluate computes the numeric value expressed by a series of
@@ -86,16 +96,26 @@ func evaluate(tokens []token) float64 {
 	answer := float64(0)
 	index := 0
 
-	// 先乘除後加減 ////// <- 如何判定
-
 	for index < len(tokens) {
+		temp := float64(0)
+		switch tokens[index].kind {
+		case Mul:
+			temp = tokens[index-1].number * tokens[index+1].number
+			tokens= removeIndex(tokens, index, temp)
+		case Div:
+			temp = tokens[index-1].number / tokens[index+1].number
+			tokens= removeIndex(tokens, index, temp)
+		default:
+			index += 1
+		}
+	}
+	fmt.Println(tokens)
+	index = 0
+
+	for index < len(tokens){
 		switch tokens[index].kind {
 		case Number:
 			switch tokens[index-1].kind {
-			case Mul:
-				answer *= tokens[index].number
-			case Div:
-				answer /= tokens[index].number
 			case Plus:
 				answer += tokens[index].number
 			case Minus:
@@ -106,7 +126,6 @@ func evaluate(tokens []token) float64 {
 		}
 		index += 1
 	}
-
 	return answer
 }
 
@@ -119,11 +138,11 @@ func readMinus(line string, index int) (token, int) {
 }
 
 func readMul(line string, index int)(token, int){
-	return token{Mul, 0}, index+1
+	return token{Mul, 0}, index + 1
 }
 
 func readDiv(line string, index int)(token, int) {
-	return token{Div, 0}, index+1
+	return token{Div, 0}, index + 1
 }
 
 func readNumber(line string, index int) (token, int) {
