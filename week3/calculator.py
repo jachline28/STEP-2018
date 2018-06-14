@@ -56,7 +56,6 @@ def tokenize(line, currentSystem):
             print('Invalid character found: '.format(line[index]))
             exit(1)
         tokens.append(token)
-    print(tokens)
     return tokens
 
 def evaluate(tokens):
@@ -105,20 +104,20 @@ def division(tokens):
     noParTokens= []
     ParExist= False
     index= 0
-    leftIndex= [] # Stack to store all left paranthesis index
+    leftIndex= [] # Stack to store all left parenthesis index
 
-    # copy part not in paranthesis
+    # copy part not in parenthesis
     while index < len(tokens):
         if tokens[index]['type'] == 'LPAR':
             ParExist= True
             noParTokens= tokens[:index]
             break
         elif tokens[index]['type'] == 'RPAR':
-            print('>> paranthesis are not pairwise ')
+            print('>> parenthesis are not pairwise ')
             return False
         index+= 1
 
-    # no paranthesis case
+    # no parenthesis case
     if not ParExist:
         return evaluate(tokens)
 
@@ -130,7 +129,7 @@ def division(tokens):
             noParTokens.append(tokens[index])
         elif tokens[index]['type'] == 'RPAR':
             if leftIndex == []:
-                print('>> paranthesis are not pairwise ')
+                print('>> parenthesis are not pairwise ')
                 return False
             left= leftIndex.pop()
             result= evaluate(tokens[left+1:index])
@@ -142,7 +141,7 @@ def division(tokens):
         index+= 1
 
     if leftIndex!= []:
-        print('>> paranthesis are not pairwise ')
+        print('>> parenthesis are not pairwise ')
         return False
 
     #print("no par tokens is {}".format(noParTokens))
@@ -172,9 +171,8 @@ def test(line, expectedAnswer):
 # Add some special cases
 #### Strip all weird whitespaces
 #### Multi-use of symbol of multiplication "*" and "x"
-#### Multiple multiplication and division allowed
 #### Detection of demominator as zero
-#### Paranthesis Faliure
+#### parenthesis Faliure
 
 def runTest():
     print("==== Test started! ====")
@@ -195,6 +193,7 @@ def runTest():
     test("(", False)
     test("20/((10*1)-(90/10)",False)
     test("2*3*4)", False)
+
     print("==== Test finished! ====\n")
 
 def graph():
