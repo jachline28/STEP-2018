@@ -1,4 +1,14 @@
 #This code is wrote by Python 3
+symbol= {'+': 'PLUS',
+         '-': 'MINUS',
+         '*': 'MUL',
+         'x': 'MUL',
+         '/': 'DIV',
+         '%': 'MOD',
+         '^': 'POW',
+         '(': 'LPAR',
+         ')': 'RPAR'
+}
 
 def readNumber(line, index):
     number = 0
@@ -16,22 +26,9 @@ def readNumber(line, index):
     return token, index
 
 # (index+1) to move forward for the foor loop
-def readPlus(line, index):
-    token = {'type': 'PLUS'}
-    return token, index+1
-
-def readMinus(line, index):
-    token = {'type': 'MINUS'}
-    return token, index+1
-
-def readMul(line, index):
-    token= {'type': 'MUL'}
-    return token, index+1
-
-def readDiv(line, index):
-    token= {'type': 'DIV'}
-    return token, index+1
-
+def readSymbol(line, index):
+    eachType= symbol[line[index]]
+    return {'type': eachType}, index+1
 
 def tokenize(line):
     line= "".join(line.split())
@@ -40,30 +37,22 @@ def tokenize(line):
     while index < len(line):
         if line[index].isdigit():
             (token, index) = readNumber(line, index)
-        elif line[index] == '+':
-            (token, index) = readPlus(line, index)
-        elif line[index] == '-':
-            (token, index) = readMinus(line, index)
-        elif line[index] in ('x', '*'):
-            (token, index) = readMul(line, index)
-        elif line[index] == '/':
-            (token, index) = readDiv(line, index)
+        elif line[index] in symbol:
+            (token, index) = readSymbol(line, index)
         else:
             print('Invalid character found: '.format(line[index]))
             exit(1)
         tokens.append(token)
     return tokens
 
-
 def evaluate(tokens):
     answer = 0
     tokens.insert(0, {'type': 'PLUS'}) # Insert a dummy '+' token
     index = 1
 
-
     # Do MULtiplication and Division first
     while index < len(tokens):
-        if tokens[index]['type'] in ('MUL', 'DIV'):
+        if tokens[index]['type'] in {'MUL', 'DIV'}:
             temp= 0
             if tokens[index]['type'] == 'MUL':
                 temp = tokens[index -1]['number'] * tokens[index+ 1]['number']
@@ -76,7 +65,8 @@ def evaluate(tokens):
             tokens[index-1:index+2] = [{'type':"NUMBER", 'number':temp}]
         else:
             index += 1
-    #print(tokens)
+#    print(tokens)
+
     index= 1
     #Do Plus and Minus second
     while index < len(tokens):
@@ -91,11 +81,59 @@ def evaluate(tokens):
 
     return answer
 
+def division(tokens):
+    noParTokens= []
+    ParExist= False
+    index= 0
+    leftIndex= [] # Stack to store all left paranthesis index
+
+    # copy part not in paranthesis
+    while index < len(tokens):
+        if tokens[index]['type'] == 'LPAR':
+            ParExist= True
+            noParTokens= tokens[:index]
+            break
+        elif tokens[index]['type'] == 'RPAR':
+            print('paranthesis are not pairwise ')
+            return False
+        index+= 1
+
+    # no paranthesis case
+    if not ParExist:
+        return evaluate(tokens)
+
+    # Start from index == LPAR, must have
+    while index < len(tokens):
+        if tokens[index]['type'] == 'LPAR':
+            leftIndex.append(index)
+        elif leftIndex == []:
+            noParTokens.append(tokens[index])
+        elif tokens[index]['type'] == 'RPAR':
+            if leftIndex == []:
+                print('paranthesis are not pairwise ')
+                return False
+            left= leftIndex.pop()
+            result= evaluate(tokens[left+1:index])
+            if leftIndex != []:                       #exist outer left parenthesis
+                tokens[left:index+1]= [{'type':"NUMBER", 'number':result}]
+                index -= (index-left)
+            else:                                   #left one parenthesis
+                noParTokens.append({'type':"NUMBER", 'number':result})
+        index+= 1
+
+    if leftIndex!= []:
+        print('paranthesis are not pairwise ')
+        return False
+
+    #print("no par tokens is {}".format(noParTokens))
+    return evaluate(noParTokens)
+
+
 
 def test(line, expectedAnswer):
     print("test {}".format(line))
     tokens = tokenize(line)
-    actualAnswer = evaluate(tokens)
+    actualAnswer = division(tokens)
     if abs(actualAnswer - expectedAnswer) < 1e-8:
         print("PASS! ({} = {})".format(line, expectedAnswer))
     else:
@@ -107,6 +145,7 @@ def test(line, expectedAnswer):
 #### Multi-use of symbol of multiplication "*" and "x"
 #### Multiple multiplication and division allowed
 #### Detection of demominator as zero
+#### Paranthesis Faliure
 
 def runTest():
     print("==== Test started! ====")
@@ -120,13 +159,23 @@ def runTest():
     test("1x4+6*5", 34)
     test("100x4/10/80", 0.5)
     test("1x2x3x4/0", False)
+
+    test("2x(3+1)",8)
+    test("1.0*(2+4)-(0.5*2+1)/2.0",5.0)
+    test("10/(8-12/(8/2-1))",2)
+
+    test("(", False)
+    test("20/((10*1)-(90/10)",False)
+    test("2*3*4)", False)
     print("==== Test finished! ====\n")
 
-runTest()
+def main():
+    runTest()
+    while True:
+        line = input('>')
+        tokens = tokenize(line)
+        answer = evaluate(tokens)
+        print("answer = {}\n".format(answer))
 
-while True:
-    print('> ')
-    line = input()
-    tokens = tokenize(line)
-    answer = evaluate(tokens)
-    print("answer = {}\n".format(answer))
+if __name__ == '__main__':
+    __main__()
