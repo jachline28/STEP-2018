@@ -12,17 +12,12 @@ symbol= {'+': 'PLUS',
          ')': 'RPAR'
 }
 hexString= {'a':10, 'A':10, 'b':11, 'B':11, 'c':12, 'C':12, 'd':13, 'D':13, 'e':14, 'E':14, 'f':15, 'F':15}
+numericalSystem= {"bi":2, "oct":8, "des":10, "hex":16}
 
 def readNumber(line, index, currentSystem):
     number = flag = 0
     keta = 1
-    base = 10  #decimal default
-    if currentSystem == "bi":
-        base= 2
-    elif currentSystem == "oct":
-        base= 8
-    elif currentSystem == "hex":
-        base= 16
+    base = numericalSystem[currentSystem]
     while index < len(line) and (line[index].isdigit() or line[index] == '.' or line[index] in hexString):
         if line[index] == '.':
             flag = 1
@@ -94,8 +89,8 @@ def evaluate(tokens):
                 answer += tokens[index]['number']
             elif tokens[index - 1]['type'] == 'MINUS':
                 answer -= tokens[index]['number']
-#           else:
-#               print('Invalid syntax')
+            else:
+                print('Invalid syntax')
         index += 1
 
     return answer
@@ -156,7 +151,6 @@ def printAnswer(answer, system):
     elif system == "oct":
         print("answer = {0:o}\n".format(answer))
     elif system == "hex":
-        print("in hex!!")
         print("answer = {0:x}\n".format(answer))
 
 def test(line, expectedAnswer):
@@ -222,8 +216,6 @@ def __main__():
     runTest()
     # ASCII art
     graph()
-    tempResult= 0
-    numericalSystem= {"bi", "oct", "des", "hex"}
     currentSystem= "des"     #default
 
     while True:
