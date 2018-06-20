@@ -1,14 +1,17 @@
 
 def __main__():
+    limitation= 100
+
+
     count= 0
     smallFp= open('less_links.txt', 'w')
     with open ('links.txt', 'r') as fp:
         for line in fp:
             [u, v]= line.split()
-            if int(u) >= 100:
+            if int(u) >= limitation:
                 break
             else:
-                if int(v) > 100:
+                if int(v) > limitation:
                     continue
                 else:
                     smallFp.write(line)
@@ -19,7 +22,7 @@ def __main__():
     smallPageFp= open('less_pages.txt', 'w')
 
     with open('pages.txt', 'r') as fp:
-        for i in range(100):
+        for i in range(limitation):
             smallPageFp.write(fp.readline())
 
     smallPageFp.close()
