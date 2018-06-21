@@ -1,9 +1,10 @@
 from collections import defaultdict
-
+import json
 class createDict:
     def __init__(self):
         # if v>u than regular, u>v than reverse
         self.regularGraph= defaultdict(list)
+        # only store the pair where u < v
         self.fullConnected= defaultdict(list)
         self.nameList= defaultdict(list)
 
@@ -18,6 +19,7 @@ class createDict:
             if int(u)> int(v):
                 if v in self.regularGraph.keys() and u in self.regularGraph[v]:
                     if v in self.fullConnected.keys():
+
                         self.fullConnected[v].append(u)
                     else:
                         self.fullConnected[v]= [u]
@@ -44,3 +46,16 @@ class createDict:
 
     def numberOfKeys(self):
         return len(self.fullConnected)
+
+    def getRegular(self):
+        return self.regularGraph
+
+
+#with open("less_pairs.txt", "w") as fp:
+#    Dict= createDict()
+#    Dict.readFiles(path="wikipedia_links/medium_")
+#    fp.write(json.dumps(Dict.getGraph()))
+#    fp.write(json.dumps(Dict.getNameList()))
+#    regular= Dict.getRegular()
+#    print(regular)
+

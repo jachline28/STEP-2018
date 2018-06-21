@@ -1,10 +1,10 @@
 
 def __main__():
-    limitation= 100
+    limitation= 100000
 
 
     count= 0
-    smallFp= open('less_links.txt', 'w')
+    smallFp= open('medium_links.txt', 'w')
     with open ('links.txt', 'r') as fp:
         for line in fp:
             [u, v]= line.split()
@@ -19,7 +19,7 @@ def __main__():
 
     smallFp.close()
     print("{} links in total".format(count))
-    smallPageFp= open('less_pages.txt', 'w')
+    smallPageFp= open('medium_pages.txt', 'w')
 
     with open('pages.txt', 'r') as fp:
         for i in range(limitation):
