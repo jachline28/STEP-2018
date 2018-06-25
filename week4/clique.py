@@ -3,7 +3,7 @@ import time
 def __main__():
     start= time.time()
     Dict= Mydict.createDict()
-    Dict.readFiles(path="wikipedia_links/medium_")
+    Dict.readFiles(path="wikipedia_links/")
     nameList= Dict.getNameList()
     middle= time.time()
     print("Spent {}s to create dictionary".format(middle-start))

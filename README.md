@@ -5,8 +5,8 @@ There are eight classes per week (from 5/25 ~ 7/13) with different topics, inclu
 1. [Intro](#week-1-i-can-haz-wordz)  
 2. [Data Structures](#week-2-matrix-multiplication)  
 3. [Code Modulity](#week-3-code-modulity)  
-4. More Data Structures and Algorithms  
-5. TSP Challenges  
+4. [Graph BFS & DFS](#week-4-graph-bfs-&-dfs)  
+5. [TSP Challenges](#week-5-tsp-challenges)  
 6. Distributed Computing and AppEngine  
 7. Game Tree Challenge  
 8. Caching and Optimizing  
@@ -59,7 +59,14 @@ Create a simple calculator with "Code Modulity" and "Rule of Debugging" in mind.
 1. The thought of giving labels to differencing between number and symbols    
 2. Orders are still in consideration by implementing list   
 3. The flow from tokenizing (labeling symbols, calculating numbers char by char, labeling numbers) to evaluating (formula calculation)    
-4. Possible improvement: 
-
 
 ************************************
+#### Week 4: Graph BFS & DFS
+This week's challenge is to find **interesting things** from links of wikipedia, where the data of links and page name can be downloaded from [here](https://drive.google.com/file/d/1HT6OiQgG0wfeC0xulLfuWqq7y4KT4xHW/view).   
+I tried to find duplex connected clique in this dataset and my description is over [here](https://docs.google.com/document/d/16pQmg6Riw1BNAM6ijPzmBL7mH6uyTS4PaXDhCw4AmLs/edit).   
+One of the big challenge is to deal with large dataset, so I did not traverse through the whole dataset to find the longest string.  
+
+************************************
+#### Week 5: TSP Challenges  
+
+The detail of this week's homework is over [here](https://github.com/rika77/google-step-tsp), where I worked with [Rika-san](https://github.com/rika77) and [Saki-san](https://github.com/h54k3y).
